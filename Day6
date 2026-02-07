@@ -1,0 +1,68 @@
+class InstagramAccount:
+
+    # constructor
+    def __init__(self, username, password):
+        self.username = username
+        self.__password = password         
+        self.private_reels = []
+        self.archived_reels = []
+
+    def add_private_reel(self, reel):
+        self.private_reels.append(reel)
+
+    def add_archived_reel(self, reel):
+        self.archived_reels.append(reel)
+
+    def display_private_reels(self, is_follower):
+        print("\nPrivate Reels:")
+
+        if is_follower:
+            for reel in self.private_reels:
+                print("-", reel)
+        else:
+            print("Access Denied (Only followers can view private reels)")
+
+    def display_archived_reels(self, password):
+        print("\nArchived Reels:")
+
+        if password == self.__password:
+            for reel in self.archived_reels:
+                print("-", reel)
+        else:
+            print("Wrong Password!")
+
+    def set_password(self, new_password):
+        self.__password = new_password
+        print("\nPassword Updated Successfully!")
+
+
+account = InstagramAccount("somu_insta", "1234")
+
+account.add_private_reel("Trip to Goa")
+account.add_private_reel("Birthday Party")
+
+
+account.add_archived_reel("Old School Video")
+account.add_archived_reel("First Reel Ever")
+
+
+print("As Follower:")
+account.display_private_reels(True)
+
+print("\nAs Non-Follower:")
+account.display_private_reels(False)
+
+print("\nUsing Wrong Password:")
+account.display_archived_reels("0000")
+
+print("\nUsing Correct Password:")
+account.display_archived_reels("1234")
+
+account.set_password("9999")
+
+
+print("\nTry with Old Password:")
+account.display_archived_reels("1234")
+
+print("\nTry with New Password:")
+account.display_archived_reels("9999")
